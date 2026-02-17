@@ -1,4 +1,3 @@
-import React from 'react';
 import Circle from './Circle';
 import type { Meta, StoryObj } from '@storybook/react';
 
