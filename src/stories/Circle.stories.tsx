@@ -17,6 +17,18 @@ const meta: Meta<typeof Circle> = {
 export default meta;
 type Story = StoryObj<typeof Circle>;
 
-export const Default: Story = {
+export const red: Story = {
     args: { size: 80, color: 'red' },
+};
+
+export const green: Story = {
+    args: { size: 80, color: 'green'},
+};
+
+export const yellow: Story = {
+    args: { size: 80, color: 'yellow'}
+};
+
+export const blue: Story = {
+    args: { size: 80, color: 'blue'}
 };
