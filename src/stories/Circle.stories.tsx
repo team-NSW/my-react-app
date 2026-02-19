@@ -6,6 +6,11 @@ const meta: Meta<typeof Circle> = {
     component: Circle,
     parameters: {
         layout: 'centered',
+        docs: {
+            description: {
+                component : 'ただの丸です。'
+            },
+        },
     },
     tags: ['autodocs'],
     argTypes: {

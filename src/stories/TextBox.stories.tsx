@@ -7,6 +7,11 @@ const meta: Meta<typeof TextBox> = {
     component: TextBox,
     parameters: {
         layout: 'centered',
+        docs: {
+          description: {
+            component: 'ユーザが入力するテキストボックスです。'
+          }
+        }
     },
     tags: ['autodocs'],
     argTypes: {
