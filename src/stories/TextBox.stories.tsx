@@ -5,6 +5,10 @@ import { useState } from "react";
 const meta: Meta<typeof TextBox> = {
     title: "Example/TextBox",
     component: TextBox,
+    parameters: {
+        layout: 'centered',
+    },
+    tags: ['autodocs'],
     argTypes: {
         placeholder: { control: "text" },
         disabled: { control: "boolean"},

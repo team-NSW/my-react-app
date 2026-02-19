@@ -4,6 +4,10 @@ import type { Meta, StoryObj } from '@storybook/react';
 const meta: Meta<typeof Circle> = {
     title: 'Example/Circle',
     component: Circle,
+    parameters: {
+        layout: 'centered',
+    },
+    tags: ['autodocs'],
     argTypes: {
         color: {
             control: 'select',
