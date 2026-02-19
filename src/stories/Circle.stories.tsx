@@ -15,10 +15,16 @@ const meta: Meta<typeof Circle> = {
     tags: ['autodocs'],
     argTypes: {
         color: {
-            control: 'select',
-            options: ['blue', 'red', 'green', 'yellow'],
+            control: 'color',
+            // options: ['blue', 'red', 'green', 'yellow'],
         },
-        size: { control: 'number'},
+        size: { control: {
+            type: 'range',
+            min: 10,
+            max: 100,
+            step: 1
+
+        }},
     },
 };
 
