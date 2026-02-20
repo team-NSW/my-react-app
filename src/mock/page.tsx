@@ -7,6 +7,7 @@ import { Input } from '../components/Input';
 import { HALF, getMonthsByHalf } from "../enums/months";
 
 export default function MockPage() {
+  const [period, setPeriod] = useState('');
   const [half, setHalf] = useState('');
   const [month, setMonth] = useState('');
   const [name, setName] = useState('');
@@ -24,15 +25,15 @@ export default function MockPage() {
   };
 
   const handleSubmit = () => {
-    alert(`半期: ${half}\n月: ${month}\n名前: ${name}\nファイル: ${file?.name || 'なし'}`);
+    alert(`期別: ${period}\n半期: ${half}\n月: ${month}\n名前: ${name}\nファイル: ${file?.name || 'なし'}`);
   };
 
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-2xl mx-auto bg-white rounded-lg shadow p-6 space-y-6">
         <h1 className="text-2xl font-bold text-gray-900">📊 原価見込みExcel読み込み</h1>
-        
-        <Select 
+        <Input type='number' id="period" label="期別" value={period} onChange={(e) => setPeriod(e.target.value)} required />
+        <Select
           id="half-select"
           label="半期"
           value={half}
@@ -41,8 +42,8 @@ export default function MockPage() {
           placeholder="半期を選択"
           required
         />
-        
-        <Select 
+
+        <Select
           id="month-select"
           label="月"
           value={month}
@@ -54,20 +55,20 @@ export default function MockPage() {
         />
         <Input id="name" label="名前を入力(部分一致)" value={name} onChange={(e) => setName(e.target.value)} required />
 
-        <InputExcelFile 
+        <InputExcelFile
           id="file-input"
           label="Excelファイル"
           onChange={setFile}
           onError={(error) => console.error(error)}
           required
         />
-        
-        <Button 
+
+        <Button
           onClick={handleSubmit}
           fullWidth
-          disabled={!half || !month || !file}
+          disabled={!period || !half || !month || !name || !file}
         >
-          Submit
+          Excel読み込み開始
         </Button>
 
         {/* 選択内容の表示（デバッグ用） */}
@@ -75,6 +76,7 @@ export default function MockPage() {
           <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
             <h3 className="font-semibold text-blue-800 mb-2">選択内容</h3>
             <div className="text-sm text-blue-700 space-y-1">
+              {period && <p><strong>期別:</strong> {period}</p>}
               {half && <p><strong>半期:</strong> {HALF.find(h => h.value === half)?.label}</p>}
               {month && <p><strong>月:</strong> {monthOptions.find(m => m.value === month)?.label}</p>}
               {name && <p><strong>名前:</strong> {name}</p>}
