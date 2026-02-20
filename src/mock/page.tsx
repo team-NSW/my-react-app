@@ -3,11 +3,13 @@ import { useState, useMemo } from 'react';
 import { Select } from "../components/Select";
 import { Button } from "../components/Button";
 import { InputExcelFile } from "../components/InputExcelFile";
+import { Input } from '../components/Input';
 import { HALF, getMonthsByHalf } from "../enums/months";
 
 export default function MockPage() {
   const [half, setHalf] = useState('');
   const [month, setMonth] = useState('');
+  const [name, setName] = useState('');
   const [file, setFile] = useState<File | null>(null);
 
   // 半期に応じた月の選択肢を取得
@@ -22,14 +24,13 @@ export default function MockPage() {
   };
 
   const handleSubmit = () => {
-    console.log('送信データ:', { half, month, file: file?.name });
-    alert(`半期: ${half}\n月: ${month}\nファイル: ${file?.name || 'なし'}`);
+    alert(`半期: ${half}\n月: ${month}\n名前: ${name}\nファイル: ${file?.name || 'なし'}`);
   };
 
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-2xl mx-auto bg-white rounded-lg shadow p-6 space-y-6">
-        <h1 className="text-2xl font-bold text-gray-900">Mock Page</h1>
+        <h1 className="text-2xl font-bold text-gray-900">📊 原価見込みExcel読み込み</h1>
         
         <Select 
           id="half-select"
@@ -51,12 +52,14 @@ export default function MockPage() {
           disabled={!half}
           required
         />
-        
+        <Input id="name" label="名前を入力(部分一致)" value={name} onChange={(e) => setName(e.target.value)} required />
+
         <InputExcelFile 
           id="file-input"
           label="Excelファイル"
           onChange={setFile}
           onError={(error) => console.error(error)}
+          required
         />
         
         <Button 
@@ -74,6 +77,7 @@ export default function MockPage() {
             <div className="text-sm text-blue-700 space-y-1">
               {half && <p><strong>半期:</strong> {HALF.find(h => h.value === half)?.label}</p>}
               {month && <p><strong>月:</strong> {monthOptions.find(m => m.value === month)?.label}</p>}
+              {name && <p><strong>名前:</strong> {name}</p>}
               {file && <p><strong>ファイル:</strong> {file.name}</p>}
             </div>
           </div>
