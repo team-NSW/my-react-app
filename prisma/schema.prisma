@@ -5,10 +5,21 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client"// "prisma-client-js" から変更
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+  output   = "../src/generated/prisma"//自分で指定 
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+
+model Test{
+  id             Int              @id @default(autoincrement())
+  memo           String
+  /// 登録日時
+  createdAt DateTime @default(now()) @map("created_at")
+  /// 更新日時
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 }
